@@ -16,6 +16,28 @@ Color warnaUtama = Color(0xffC7E8CA);
 Color warnaKedua = Color(0xff7ED97);
 Color warnaKetiga = Color(0xff008037);
 Color warnaButton = Color(0xff7ED957);
+Color bggreenColor = Color(0xffC7E8CA);
+Color bg2greenColor = Color(0xff7ED957);
+Color bg3greenColor = Color(0xff008037);
+Color alertColor = Color(0xffED6363);
+Color putihColor = Color(0xffF1F0F2);
+Color transparanColor = Colors.transparent;
+
+TextStyle putihTextStyle = GoogleFonts.poppins(
+  color: putihColor,
+);
+
+TextStyle ijo1TextStyle = GoogleFonts.poppins(
+  color: bg2greenColor,
+);
+
+TextStyle tulisanRP = GoogleFonts.poppins(
+  color: bg2greenColor,
+);
+
+TextStyle tulisanumumkhusus = GoogleFonts.poppins(
+  color: bg3greenColor,
+);
 
 TextStyle primaryTextStyle = GoogleFonts.poppins(
   color: primaryTextColor,
