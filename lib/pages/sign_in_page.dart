@@ -1,42 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:proyek3_flutter/pages/widgets/loading_button.dart';
-import 'package:proyek3_flutter/providers/auth_provider.dart';
 import 'package:proyek3_flutter/theme.dart';
+import 'package:provider/provider.dart';
+import 'package:proyek3_flutter/providers/auth_provider.dart';
 
-class SignUpPage extends StatefulWidget {
+class SignInPage extends StatefulWidget {
+  
+
   @override
-  State<SignUpPage> createState() => _SignUpPageState();
+  State<SignInPage> createState() => _SignInPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
-  TextEditingController nameController = TextEditingController(text: '');
-
-  TextEditingController usernameController = TextEditingController(text: '');
+class _SignInPageState extends State<SignInPage> {
 
   TextEditingController emailController = TextEditingController(text: '');
 
   TextEditingController passwordController = TextEditingController(text: '');
 
-  // TextEditingController phoneController = TextEditingController(text: '');
-
   bool isLoading = false;
+
 
   @override
   Widget build(BuildContext context) {
-    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    /* Membuat Beberapa Widget */
 
-    handleSignUp() async {
+     AuthProvider authProvider = Provider.of<AuthProvider>(context);
+
+    handleSignIn() async {
       setState(() {
         isLoading = true;
       });
 
-      if (await authProvider.register(
-        name: nameController.text,
-        username: usernameController.text,
+      if (await authProvider.login(
         email: emailController.text,
         password: passwordController.text,
-        // phone: phoneController.text,
       )) {
         Navigator.pushNamed(context, '/home');
       } else {
@@ -44,7 +41,7 @@ class _SignUpPageState extends State<SignUpPage> {
           SnackBar(
             backgroundColor: alertColor,
             content: Text(
-              'Gagal Register',
+              'Gagal Login',
               textAlign: TextAlign.center,
             ),
           ),
@@ -56,7 +53,6 @@ class _SignUpPageState extends State<SignUpPage> {
       });
     }
 
-    /* Membuat Beberapa Widget */
     Widget header() {
       return Container(
         margin: EdgeInsets.only(top: 30),
@@ -64,7 +60,7 @@ class _SignUpPageState extends State<SignUpPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Registrasi',
+              'Login',
               style: ijo1TextStyle.copyWith(
                 fontSize: 30,
                 fontWeight: semiBold,
@@ -74,116 +70,8 @@ class _SignUpPageState extends State<SignUpPage> {
               height: 2,
             ),
             Text(
-              'Silahkan Daftar Terlebih Dahulu',
+              'Selamat Datang Di Store Asap Cair',
               style: tulisanumumkhusus,
-            ),
-          ],
-        ),
-      );
-    }
-
-    Widget nameInput() {
-      return Container(
-        margin: EdgeInsets.only(top: 50),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Nama Lengkap',
-              style: ijo1TextStyle.copyWith(
-                fontSize: 17,
-                fontWeight: semiBold,
-              ),
-            ),
-            SizedBox(
-              height: 12,
-            ),
-            Container(
-              height: 55,
-              padding: EdgeInsets.symmetric(
-                horizontal: 16,
-              ),
-              decoration: BoxDecoration(
-                color: bg2greenColor,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Center(
-                child: Row(
-                  children: [
-                    Image.asset(
-                      'assets/icon_name.png',
-                      width: 23,
-                    ),
-                    SizedBox(
-                      width: 16,
-                    ),
-                    Expanded(
-                      child: TextFormField(
-                        style: tulisanumumkhusus,
-                        controller: nameController,
-                        decoration: InputDecoration.collapsed(
-                          hintText: 'Masukan Nama Lengkap',
-                          hintStyle: tulisanumumkhusus,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      );
-    }
-
-    Widget usernameInput() {
-      return Container(
-        margin: EdgeInsets.only(top: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Username',
-              style: ijo1TextStyle.copyWith(
-                fontSize: 17,
-                fontWeight: semiBold,
-              ),
-            ),
-            SizedBox(
-              height: 12,
-            ),
-            Container(
-              height: 55,
-              padding: EdgeInsets.symmetric(
-                horizontal: 16,
-              ),
-              decoration: BoxDecoration(
-                color: bg2greenColor,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Center(
-                child: Row(
-                  children: [
-                    Image.asset(
-                      'assets/icon_username.png',
-                      width: 23,
-                    ),
-                    SizedBox(
-                      width: 16,
-                    ),
-                    Expanded(
-                      child: TextFormField(
-                        style: tulisanumumkhusus,
-                        controller: usernameController,
-                        decoration: InputDecoration.collapsed(
-                          hintText: 'Masukan Username Anda',
-                          hintStyle: tulisanumumkhusus,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
             ),
           ],
         ),
@@ -192,7 +80,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
     Widget emailInput() {
       return Container(
-        margin: EdgeInsets.only(top: 20),
+        margin: EdgeInsets.only(top: 70),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -243,61 +131,6 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
       );
     }
-
-
-    // Widget phoneInput() {
-    //   return Container(
-    //     margin: EdgeInsets.only(top: 20),
-    //     child: Column(
-    //       crossAxisAlignment: CrossAxisAlignment.start,
-    //       children: [
-    //         Text(
-    //           'Phone ',
-    //           style: ijo1TextStyle.copyWith(
-    //             fontSize: 17,
-    //             fontWeight: semiBold,
-    //           ),
-    //         ),
-    //         SizedBox(
-    //           height: 12,
-    //         ),
-    //         Container(
-    //           height: 55,
-    //           padding: EdgeInsets.symmetric(
-    //             horizontal: 16,
-    //           ),
-    //           decoration: BoxDecoration(
-    //             color: bg2greenColor,
-    //             borderRadius: BorderRadius.circular(12),
-    //           ),
-    //           child: Center(
-    //             child: Row(
-    //               children: [
-    //                 Image.asset(
-    //                   'assets/icon_email.png',
-    //                   width: 23,
-    //                 ),
-    //                 SizedBox(
-    //                   width: 16,
-    //                 ),
-    //                 Expanded(
-    //                   child: TextFormField(
-    //                     style: tulisanumumkhusus,
-    //                     controller: phoneController,
-    //                     decoration: InputDecoration.collapsed(
-    //                       hintText: 'Masukan Phone Anda',
-    //                       hintStyle: tulisanumumkhusus,
-    //                     ),
-    //                   ),
-    //                 ),
-    //               ],
-    //             ),
-    //           ),
-    //         ),
-    //       ],
-    //     ),
-    //   );
-    // }
 
     Widget passwordInput() {
       return Container(
@@ -360,7 +193,7 @@ class _SignUpPageState extends State<SignUpPage> {
         width: double.infinity,
         margin: EdgeInsets.only(top: 40),
         child: TextButton(
-          onPressed: handleSignUp,
+          onPressed: handleSignIn,
           style: TextButton.styleFrom(
             backgroundColor: bg3greenColor,
             shape: RoundedRectangleBorder(
@@ -368,7 +201,7 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
           ),
           child: Text(
-            'Daftar',
+            'Masuk',
             style: putihTextStyle.copyWith(
               fontSize: 16,
               fontWeight: medium,
@@ -385,15 +218,15 @@ class _SignUpPageState extends State<SignUpPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Sudah Punya Akun ? ',
+              'Belum Punya Akun ? ',
               style: ijo1TextStyle.copyWith(fontSize: 12, fontWeight: semiBold),
             ),
             GestureDetector(
               onTap: () {
-                Navigator.pop(context);
+                Navigator.pushNamed(context, '/sign-up');
               },
               child: Text(
-                'Login',
+                'Registrasi',
                 style:
                     tulisanumumkhusus.copyWith(fontSize: 12, fontWeight: bold),
               ),
@@ -412,16 +245,11 @@ class _SignUpPageState extends State<SignUpPage> {
             horizontal: defaultMargin,
           ),
           child: Column(
-            
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               header(),
-              nameInput(),
-              usernameInput(),
               emailInput(),
-              // phoneInput(),
               passwordInput(),
-              
               isLoading ? LoadingButton() : signInBuutton(),
               Spacer(),
               footer(),
